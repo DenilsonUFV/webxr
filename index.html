@@ -33,8 +33,22 @@
       </div>
     </div>
     <script>
-document.dispatchEvent(new CustomEvent('toggleAR', {}));
-
+      let enterARButton = document.getElementById('enterar');
+      let enterVRButton = document.getElementById('entervr');
+      
+      document.addEventListener('onARSupportedCheck', function (event) {
+        enterARButton.disabled = !event.detail.supported;
+      }, false);
+      document.addEventListener('onVRSupportedCheck', function (event) {
+        enterVRButton.disabled = !event.detail.supported;
+      }, false);
+      
+      enterARButton.addEventListener('click', function (event) {
+        document.dispatchEvent(new CustomEvent('toggleAR', {}));
+      }, false);
+      enterVRButton.addEventListener('click', function (event) {
+        document.dispatchEvent(new CustomEvent('toggleVR', {}));
+      }, false);
     </script>
   </body>
 </html>
